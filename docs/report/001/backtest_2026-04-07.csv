@@ -1,0 +1,7 @@
+contest,experiment,family,preset,bet_size,total,media,max,min
+1,Random 15,random,,15,2,9.000000,9,9
+2,Random 15,random,,15,2,8.000000,8,8
+2,Statistical balanced 15,statistical,balanced,15,2,9.000000,10,8
+1,Random 16,random,,16,2,10.000000,10,10
+2,Random 16,random,,16,2,9.000000,9,9
+2,Statistical balanced 16,statistical,balanced,16,2,9.500000,10,9

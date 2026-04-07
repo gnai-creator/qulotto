@@ -1,0 +1,5 @@
+experiment,family,preset,bet_size,bet_cost,relative_cost,qtd_concursos_avaliados,qtd_tickets_total,media,max,min,media_por_real,maximo_por_real
+Random 15,random,,15,3.50,1.000000,2,4,8.500000,9,8,2.428571,2.571429
+Statistical balanced 15,statistical,balanced,15,3.50,1.000000,1,2,9.000000,10,8,2.571429,2.857143
+Random 16,random,,16,56.00,16.000000,2,4,9.500000,10,9,0.169643,0.178571
+Statistical balanced 16,statistical,balanced,16,56.00,16.000000,1,2,9.500000,10,9,0.169643,0.178571

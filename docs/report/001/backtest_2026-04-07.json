@@ -1,0 +1,603 @@
+{
+  "params": {
+    "qtd_por_concurso": 1,
+    "bet_sizes": [
+      15,
+      16
+    ],
+    "inicio": 1,
+    "fim": 2,
+    "history": 1,
+    "seed_start": 42,
+    "seed_count": 2,
+    "seeds": [
+      42,
+      43
+    ],
+    "presets": [
+      "balanced"
+    ]
+  },
+  "experiments": {
+    "random_15": {
+      "id": "random_15",
+      "display_name": "Random 15",
+      "family": "random",
+      "preset_name": null,
+      "bet_size": 15,
+      "strategy_name": "random",
+      "strategy_kwargs": {
+        "ticket_size": 15
+      }
+    },
+    "statistical_balanced_15": {
+      "id": "statistical_balanced_15",
+      "display_name": "Statistical balanced 15",
+      "family": "statistical",
+      "preset_name": "balanced",
+      "bet_size": 15,
+      "strategy_name": "statistical",
+      "strategy_kwargs": {
+        "frequency_weight": 0.45,
+        "delay_weight": 0.35,
+        "parity_weight": 0.1,
+        "range_weight": 0.1,
+        "min_numbers_per_range": 2,
+        "max_consecutive_run": 3,
+        "max_repeats_from_last_draw": 11,
+        "max_attempts": 250,
+        "ticket_size": 15,
+        "min_even_numbers": 6,
+        "max_even_numbers": 9
+      }
+    },
+    "random_16": {
+      "id": "random_16",
+      "display_name": "Random 16",
+      "family": "random",
+      "preset_name": null,
+      "bet_size": 16,
+      "strategy_name": "random",
+      "strategy_kwargs": {
+        "ticket_size": 16
+      }
+    },
+    "statistical_balanced_16": {
+      "id": "statistical_balanced_16",
+      "display_name": "Statistical balanced 16",
+      "family": "statistical",
+      "preset_name": "balanced",
+      "bet_size": 16,
+      "strategy_name": "statistical",
+      "strategy_kwargs": {
+        "frequency_weight": 0.45,
+        "delay_weight": 0.35,
+        "parity_weight": 0.1,
+        "range_weight": 0.1,
+        "min_numbers_per_range": 2,
+        "max_consecutive_run": 3,
+        "max_repeats_from_last_draw": 11,
+        "max_attempts": 250,
+        "ticket_size": 16,
+        "min_even_numbers": 7,
+        "max_even_numbers": 10
+      }
+    }
+  },
+  "results": {
+    "random_15": {
+      "strategy": "random",
+      "qtd_concursos_avaliados": 2,
+      "qtd_tickets_total": 4,
+      "summary_geral": {
+        "total": 4,
+        "media": 8.5,
+        "max": 9,
+        "min": 8,
+        "distribution": {
+          "8": 2,
+          "9": 2
+        }
+      },
+      "resultados_por_concurso": [
+        {
+          "contest": 1,
+          "summary": {
+            "total": 2,
+            "media": 9.0,
+            "max": 9,
+            "min": 9,
+            "distribution": {
+              "9": 2
+            }
+          }
+        },
+        {
+          "contest": 2,
+          "summary": {
+            "total": 2,
+            "media": 8.0,
+            "max": 8,
+            "min": 8,
+            "distribution": {
+              "8": 2
+            }
+          }
+        }
+      ],
+      "seed_results": {
+        "42": {
+          "strategy": "random",
+          "qtd_concursos_avaliados": 2,
+          "qtd_tickets_total": 2,
+          "summary_geral": {
+            "total": 2,
+            "media": 8.5,
+            "max": 9,
+            "min": 8,
+            "distribution": {
+              "8": 1,
+              "9": 1
+            }
+          },
+          "resultados_por_concurso": [
+            {
+              "contest": 1,
+              "summary": {
+                "total": 1,
+                "media": 9.0,
+                "max": 9,
+                "min": 9,
+                "distribution": {
+                  "9": 1
+                }
+              }
+            },
+            {
+              "contest": 2,
+              "summary": {
+                "total": 1,
+                "media": 8.0,
+                "max": 8,
+                "min": 8,
+                "distribution": {
+                  "8": 1
+                }
+              }
+            }
+          ]
+        },
+        "43": {
+          "strategy": "random",
+          "qtd_concursos_avaliados": 2,
+          "qtd_tickets_total": 2,
+          "summary_geral": {
+            "total": 2,
+            "media": 8.5,
+            "max": 9,
+            "min": 8,
+            "distribution": {
+              "8": 1,
+              "9": 1
+            }
+          },
+          "resultados_por_concurso": [
+            {
+              "contest": 1,
+              "summary": {
+                "total": 1,
+                "media": 9.0,
+                "max": 9,
+                "min": 9,
+                "distribution": {
+                  "9": 1
+                }
+              }
+            },
+            {
+              "contest": 2,
+              "summary": {
+                "total": 1,
+                "media": 8.0,
+                "max": 8,
+                "min": 8,
+                "distribution": {
+                  "8": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      "metadata": {
+        "id": "random_15",
+        "display_name": "Random 15",
+        "family": "random",
+        "preset_name": null,
+        "bet_size": 15,
+        "strategy_name": "random",
+        "strategy_kwargs": {
+          "ticket_size": 15
+        }
+      },
+      "cost_analysis": {
+        "bet_cost": 3.5,
+        "relative_cost": 1.0,
+        "media_por_real": 2.4285714285714284,
+        "maximo_por_real": 2.5714285714285716
+      }
+    },
+    "statistical_balanced_15": {
+      "strategy": "statistical",
+      "qtd_concursos_avaliados": 1,
+      "qtd_tickets_total": 2,
+      "summary_geral": {
+        "total": 2,
+        "media": 9.0,
+        "max": 10,
+        "min": 8,
+        "distribution": {
+          "8": 1,
+          "10": 1
+        }
+      },
+      "resultados_por_concurso": [
+        {
+          "contest": 2,
+          "summary": {
+            "total": 2,
+            "media": 9.0,
+            "max": 10,
+            "min": 8,
+            "distribution": {
+              "8": 1,
+              "10": 1
+            }
+          }
+        }
+      ],
+      "seed_results": {
+        "42": {
+          "strategy": "statistical",
+          "qtd_concursos_avaliados": 1,
+          "qtd_tickets_total": 1,
+          "summary_geral": {
+            "total": 1,
+            "media": 8.0,
+            "max": 8,
+            "min": 8,
+            "distribution": {
+              "8": 1
+            }
+          },
+          "resultados_por_concurso": [
+            {
+              "contest": 2,
+              "summary": {
+                "total": 1,
+                "media": 8.0,
+                "max": 8,
+                "min": 8,
+                "distribution": {
+                  "8": 1
+                }
+              }
+            }
+          ]
+        },
+        "43": {
+          "strategy": "statistical",
+          "qtd_concursos_avaliados": 1,
+          "qtd_tickets_total": 1,
+          "summary_geral": {
+            "total": 1,
+            "media": 10.0,
+            "max": 10,
+            "min": 10,
+            "distribution": {
+              "10": 1
+            }
+          },
+          "resultados_por_concurso": [
+            {
+              "contest": 2,
+              "summary": {
+                "total": 1,
+                "media": 10.0,
+                "max": 10,
+                "min": 10,
+                "distribution": {
+                  "10": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      "metadata": {
+        "id": "statistical_balanced_15",
+        "display_name": "Statistical balanced 15",
+        "family": "statistical",
+        "preset_name": "balanced",
+        "bet_size": 15,
+        "strategy_name": "statistical",
+        "strategy_kwargs": {
+          "frequency_weight": 0.45,
+          "delay_weight": 0.35,
+          "parity_weight": 0.1,
+          "range_weight": 0.1,
+          "min_numbers_per_range": 2,
+          "max_consecutive_run": 3,
+          "max_repeats_from_last_draw": 11,
+          "max_attempts": 250,
+          "ticket_size": 15,
+          "min_even_numbers": 6,
+          "max_even_numbers": 9
+        }
+      },
+      "cost_analysis": {
+        "bet_cost": 3.5,
+        "relative_cost": 1.0,
+        "media_por_real": 2.5714285714285716,
+        "maximo_por_real": 2.857142857142857
+      }
+    },
+    "random_16": {
+      "strategy": "random",
+      "qtd_concursos_avaliados": 2,
+      "qtd_tickets_total": 4,
+      "summary_geral": {
+        "total": 4,
+        "media": 9.5,
+        "max": 10,
+        "min": 9,
+        "distribution": {
+          "9": 2,
+          "10": 2
+        }
+      },
+      "resultados_por_concurso": [
+        {
+          "contest": 1,
+          "summary": {
+            "total": 2,
+            "media": 10.0,
+            "max": 10,
+            "min": 10,
+            "distribution": {
+              "10": 2
+            }
+          }
+        },
+        {
+          "contest": 2,
+          "summary": {
+            "total": 2,
+            "media": 9.0,
+            "max": 9,
+            "min": 9,
+            "distribution": {
+              "9": 2
+            }
+          }
+        }
+      ],
+      "seed_results": {
+        "42": {
+          "strategy": "random",
+          "qtd_concursos_avaliados": 2,
+          "qtd_tickets_total": 2,
+          "summary_geral": {
+            "total": 2,
+            "media": 9.5,
+            "max": 10,
+            "min": 9,
+            "distribution": {
+              "9": 1,
+              "10": 1
+            }
+          },
+          "resultados_por_concurso": [
+            {
+              "contest": 1,
+              "summary": {
+                "total": 1,
+                "media": 10.0,
+                "max": 10,
+                "min": 10,
+                "distribution": {
+                  "10": 1
+                }
+              }
+            },
+            {
+              "contest": 2,
+              "summary": {
+                "total": 1,
+                "media": 9.0,
+                "max": 9,
+                "min": 9,
+                "distribution": {
+                  "9": 1
+                }
+              }
+            }
+          ]
+        },
+        "43": {
+          "strategy": "random",
+          "qtd_concursos_avaliados": 2,
+          "qtd_tickets_total": 2,
+          "summary_geral": {
+            "total": 2,
+            "media": 9.5,
+            "max": 10,
+            "min": 9,
+            "distribution": {
+              "9": 1,
+              "10": 1
+            }
+          },
+          "resultados_por_concurso": [
+            {
+              "contest": 1,
+              "summary": {
+                "total": 1,
+                "media": 10.0,
+                "max": 10,
+                "min": 10,
+                "distribution": {
+                  "10": 1
+                }
+              }
+            },
+            {
+              "contest": 2,
+              "summary": {
+                "total": 1,
+                "media": 9.0,
+                "max": 9,
+                "min": 9,
+                "distribution": {
+                  "9": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      "metadata": {
+        "id": "random_16",
+        "display_name": "Random 16",
+        "family": "random",
+        "preset_name": null,
+        "bet_size": 16,
+        "strategy_name": "random",
+        "strategy_kwargs": {
+          "ticket_size": 16
+        }
+      },
+      "cost_analysis": {
+        "bet_cost": 56.0,
+        "relative_cost": 16.0,
+        "media_por_real": 0.16964285714285715,
+        "maximo_por_real": 0.17857142857142858
+      }
+    },
+    "statistical_balanced_16": {
+      "strategy": "statistical",
+      "qtd_concursos_avaliados": 1,
+      "qtd_tickets_total": 2,
+      "summary_geral": {
+        "total": 2,
+        "media": 9.5,
+        "max": 10,
+        "min": 9,
+        "distribution": {
+          "9": 1,
+          "10": 1
+        }
+      },
+      "resultados_por_concurso": [
+        {
+          "contest": 2,
+          "summary": {
+            "total": 2,
+            "media": 9.5,
+            "max": 10,
+            "min": 9,
+            "distribution": {
+              "9": 1,
+              "10": 1
+            }
+          }
+        }
+      ],
+      "seed_results": {
+        "42": {
+          "strategy": "statistical",
+          "qtd_concursos_avaliados": 1,
+          "qtd_tickets_total": 1,
+          "summary_geral": {
+            "total": 1,
+            "media": 9.0,
+            "max": 9,
+            "min": 9,
+            "distribution": {
+              "9": 1
+            }
+          },
+          "resultados_por_concurso": [
+            {
+              "contest": 2,
+              "summary": {
+                "total": 1,
+                "media": 9.0,
+                "max": 9,
+                "min": 9,
+                "distribution": {
+                  "9": 1
+                }
+              }
+            }
+          ]
+        },
+        "43": {
+          "strategy": "statistical",
+          "qtd_concursos_avaliados": 1,
+          "qtd_tickets_total": 1,
+          "summary_geral": {
+            "total": 1,
+            "media": 10.0,
+            "max": 10,
+            "min": 10,
+            "distribution": {
+              "10": 1
+            }
+          },
+          "resultados_por_concurso": [
+            {
+              "contest": 2,
+              "summary": {
+                "total": 1,
+                "media": 10.0,
+                "max": 10,
+                "min": 10,
+                "distribution": {
+                  "10": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      "metadata": {
+        "id": "statistical_balanced_16",
+        "display_name": "Statistical balanced 16",
+        "family": "statistical",
+        "preset_name": "balanced",
+        "bet_size": 16,
+        "strategy_name": "statistical",
+        "strategy_kwargs": {
+          "frequency_weight": 0.45,
+          "delay_weight": 0.35,
+          "parity_weight": 0.1,
+          "range_weight": 0.1,
+          "min_numbers_per_range": 2,
+          "max_consecutive_run": 3,
+          "max_repeats_from_last_draw": 11,
+          "max_attempts": 250,
+          "ticket_size": 16,
+          "min_even_numbers": 7,
+          "max_even_numbers": 10
+        }
+      },
+      "cost_analysis": {
+        "bet_cost": 56.0,
+        "relative_cost": 16.0,
+        "media_por_real": 0.16964285714285715,
+        "maximo_por_real": 0.17857142857142858
+      }
+    }
+  }
+}

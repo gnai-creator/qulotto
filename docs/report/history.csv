@@ -1,0 +1,5 @@
+report_date,experiment,family,preset,bet_size,seed_start,seed_count,inicio,fim,history,qtd_por_concurso,bet_cost,relative_cost,media,max,min,media_por_real,maximo_por_real
+2026-04-07,Random 15,random,,15,42,2,1,2,1,1,3.50,1.000000,8.500000,9,8,2.428571,2.571429
+2026-04-07,Statistical balanced 15,statistical,balanced,15,42,2,1,2,1,1,3.50,1.000000,9.000000,10,8,2.571429,2.857143
+2026-04-07,Random 16,random,,16,42,2,1,2,1,1,56.00,16.000000,9.500000,10,9,0.169643,0.178571
+2026-04-07,Statistical balanced 16,statistical,balanced,16,42,2,1,2,1,1,56.00,16.000000,9.500000,10,9,0.169643,0.178571

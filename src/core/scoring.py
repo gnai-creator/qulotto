@@ -1,4 +1,4 @@
-from src.data.models import Draw, Ticket
+from src.core.models import Draw, Ticket
 
 
 def count_hits(ticket: Ticket, draw: Draw) -> int:
