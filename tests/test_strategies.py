@@ -3,6 +3,7 @@ import random
 from src.app.config import build_statistical_preset
 from src.core.models import Draw
 from src.strategies.intentionality_vector import IntentionalityVectorStrategy
+from src.strategies.quantum import QuantumSimulatorStrategy
 from src.strategies.quantum_inspired import QuantumInspiredStrategy
 from src.strategies.statistical_baseline import StatisticalBaselineStrategy
 
@@ -122,6 +123,24 @@ def test_quantum_inspired_strategy_supports_ticket_size_above_15() -> None:
     strategy = QuantumInspiredStrategy(
         history_draws=history_draws,
         rng=random.Random(777),
+        ticket_size=18,
+    )
+
+    ticket = strategy.generate_ticket()
+
+    assert len(ticket.numbers) == 18
+
+
+def test_quantum_strategy_supports_ticket_size_above_15() -> None:
+    history_draws = [
+        Draw(contest=1, numbers=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]),
+        Draw(contest=2, numbers=[2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]),
+        Draw(contest=3, numbers=[3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]),
+    ]
+
+    strategy = QuantumSimulatorStrategy(
+        history_draws=history_draws,
+        rng=random.Random(555),
         ticket_size=18,
     )
 

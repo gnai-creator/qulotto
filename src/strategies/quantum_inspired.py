@@ -1,10 +1,10 @@
 import random
 
 from src.core.models import Draw, Ticket
-from src.quantum.adapters import QuantumBackendAdapter
-from src.quantum.circuits import QuantumCircuitBuilder
-from src.quantum.encodings import QuantumFeatureEncoder
-from src.quantum.samplers import QuantumSampler
+from src.quantum_inspired.adapters import QuantumBackendAdapter
+from src.quantum_inspired.circuits import QuantumCircuitBuilder
+from src.quantum_inspired.encodings import QuantumFeatureEncoder
+from src.quantum_inspired.samplers import QuantumSampler
 
 
 class QuantumInspiredStrategy:

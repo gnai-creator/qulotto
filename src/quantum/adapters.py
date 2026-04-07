@@ -1,33 +1,29 @@
 from src.core.models import Draw
-from src.quantum.circuits import QuantumCircuitBuilder
-from src.quantum.encodings import QuantumFeatureEncoder
-from src.quantum.samplers import QuantumSampler
+from src.quantum.circuits import QuantumCircuitSimulator
+from src.quantum.encodings import QuantumStateEncoder
+from src.quantum.samplers import QuantumMeasurementSampler
 
 
-class QuantumBackendAdapter:
-    """Encadeia encoding, interferencia e amostragem numa pipeline unica."""
+class QuantumSimulatorAdapter:
+    """Encapsula encoder, circuito e medicao para a estrategia quantica."""
 
     def __init__(
         self,
-        encoder: QuantumFeatureEncoder,
-        circuit_builder: QuantumCircuitBuilder,
-        sampler: QuantumSampler,
+        encoder: QuantumStateEncoder,
+        circuit: QuantumCircuitSimulator,
+        sampler: QuantumMeasurementSampler,
     ) -> None:
         self.encoder = encoder
-        self.circuit_builder = circuit_builder
+        self.circuit = circuit
         self.sampler = sampler
 
-    def run(
-        self,
-        history_draws: list[Draw],
-        ticket_size: int,
-    ) -> list[int]:
-        amplitudes = self.encoder.encode(history_draws)
-        transformed_amplitudes = self.circuit_builder.build(
-            amplitudes=amplitudes,
+    def run(self, history_draws: list[Draw], ticket_size: int) -> list[int]:
+        encoded_state = self.encoder.encode(history_draws)
+        evolved_state = self.circuit.evolve(
+            state_vector=encoded_state,
             last_draw_numbers=set(history_draws[-1].numbers),
         )
         return self.sampler.sample(
-            amplitudes=transformed_amplitudes,
+            state_vector=evolved_state,
             ticket_size=ticket_size,
         )

@@ -1,0 +1,11 @@
+experiment,family,preset,bet_size,bet_cost,relative_cost,qtd_concursos_avaliados,qtd_tickets_total,media,max,min,media_por_real,maximo_por_real
+Random 15,random,,15,3.50,1.000000,1,20,8.900000,12,5,2.542857,3.428571
+Intentionality Vector 15,intentionality_vector,,15,3.50,1.000000,1,20,9.550000,11,7,2.728571,3.142857
+Quantum Inspired 15,quantum_inspired,,15,3.50,1.000000,1,20,9.050000,11,7,2.585714,3.142857
+Quantum 15,quantum,,15,3.50,1.000000,1,20,9.250000,12,7,2.642857,3.428571
+Statistical balanced 15,statistical,balanced,15,3.50,1.000000,1,20,8.700000,11,6,2.485714,3.142857
+Random 16,random,,16,56.00,16.000000,1,20,9.950000,12,7,0.177679,0.214286
+Intentionality Vector 16,intentionality_vector,,16,56.00,16.000000,1,20,10.450000,12,8,0.186607,0.214286
+Quantum Inspired 16,quantum_inspired,,16,56.00,16.000000,1,20,10.050000,12,8,0.179464,0.214286
+Quantum 16,quantum,,16,56.00,16.000000,1,20,10.050000,12,8,0.179464,0.214286
+Statistical balanced 16,statistical,balanced,16,56.00,16.000000,1,20,9.600000,12,8,0.171429,0.214286

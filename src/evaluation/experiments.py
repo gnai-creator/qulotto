@@ -56,6 +56,18 @@ def build_experiment_specs(presets: list[str], bet_sizes: list[int]) -> list[dic
             }
         )
 
+        specs.append(
+            {
+                "id": experiment_id("quantum", bet_size),
+                "display_name": display_name("quantum", bet_size),
+                "family": "quantum",
+                "preset_name": None,
+                "bet_size": bet_size,
+                "strategy_name": "quantum",
+                "strategy_kwargs": {"ticket_size": bet_size},
+            }
+        )
+
         for preset_name in presets:
             specs.append(
                 {

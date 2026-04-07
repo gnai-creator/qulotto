@@ -4,6 +4,7 @@ from src.core.scoring import count_hits
 from src.core.models import Draw
 from src.evaluation.metrics import sumario_de_acertos
 from src.strategies.intentionality_vector import IntentionalityVectorStrategy
+from src.strategies.quantum import QuantumSimulatorStrategy
 from src.strategies.quantum_inspired import QuantumInspiredStrategy
 from src.strategies.random_baseline import RandomBaselineStrategy
 from src.strategies.statistical_baseline import StatisticalBaselineStrategy
@@ -36,6 +37,13 @@ def build_strategy(
 
     if strategy_name == "quantum_inspired":
         return QuantumInspiredStrategy(
+            history_draws=history_draws,
+            rng=rng,
+            **strategy_kwargs,
+        )
+
+    if strategy_name == "quantum":
+        return QuantumSimulatorStrategy(
             history_draws=history_draws,
             rng=rng,
             **strategy_kwargs,
@@ -81,6 +89,7 @@ def run_backtest(
             "statistical",
             "intentionality_vector",
             "quantum_inspired",
+            "quantum",
         } and not history_draws:
             continue
 
