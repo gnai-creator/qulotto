@@ -73,4 +73,14 @@ fi
 source "$VENV_DIR/bin/activate"
 python -m pip install --upgrade pip
 python -m pip install -r "$ROOT_DIR/requirements.txt"
-exec python -c "import runpy; runpy.run_path('src/scripts/001_fetch.py', run_name='__main__')"
+
+RETRY_DELAY_SECONDS=15
+
+while true; do
+  if python -c "import runpy; runpy.run_path('src/scripts/001_fetch.py', run_name='__main__')"; then
+    exit 0
+  fi
+
+  echo "Falha temporaria ao atualizar os concursos. Nova tentativa em ${RETRY_DELAY_SECONDS}s..."
+  sleep "$RETRY_DELAY_SECONDS"
+done

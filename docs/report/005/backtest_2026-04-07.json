@@ -1,0 +1,549 @@
+{
+  "params": {
+    "qtd_por_concurso": 10,
+    "bet_sizes": [
+      15
+    ],
+    "inicio": 100,
+    "fim": 100,
+    "history": 20,
+    "seed_start": 42,
+    "seed_count": 1,
+    "seeds": [
+      42
+    ],
+    "presets": [
+      "frequency_heavy"
+    ],
+    "completo": false,
+    "target_draw_count": 1,
+    "total_runs": 5,
+    "estimated_tickets": 50,
+    "estimated_total_cost": 175.0,
+    "estimated_cost_by_bet_size": {
+      "15": 175.0
+    }
+  },
+  "experiments": {
+    "random_15": {
+      "id": "random_15",
+      "display_name": "Random 15",
+      "family": "random",
+      "preset_name": null,
+      "bet_size": 15,
+      "strategy_name": "random",
+      "strategy_kwargs": {
+        "ticket_size": 15
+      }
+    },
+    "intentionality_vector_15": {
+      "id": "intentionality_vector_15",
+      "display_name": "Intentionality Vector 15",
+      "family": "intentionality_vector",
+      "preset_name": null,
+      "bet_size": 15,
+      "strategy_name": "intentionality_vector",
+      "strategy_kwargs": {
+        "ticket_size": 15
+      }
+    },
+    "quantum_inspired_15": {
+      "id": "quantum_inspired_15",
+      "display_name": "Quantum Inspired 15",
+      "family": "quantum_inspired",
+      "preset_name": null,
+      "bet_size": 15,
+      "strategy_name": "quantum_inspired",
+      "strategy_kwargs": {
+        "ticket_size": 15
+      }
+    },
+    "quantum_15": {
+      "id": "quantum_15",
+      "display_name": "Quantum 15",
+      "family": "quantum",
+      "preset_name": null,
+      "bet_size": 15,
+      "strategy_name": "quantum",
+      "strategy_kwargs": {
+        "ticket_size": 15
+      }
+    },
+    "statistical_frequency_heavy_15": {
+      "id": "statistical_frequency_heavy_15",
+      "display_name": "Statistical frequency_heavy 15",
+      "family": "statistical",
+      "preset_name": "frequency_heavy",
+      "bet_size": 15,
+      "strategy_name": "statistical",
+      "strategy_kwargs": {
+        "frequency_weight": 0.6,
+        "delay_weight": 0.2,
+        "parity_weight": 0.1,
+        "range_weight": 0.1,
+        "min_numbers_per_range": 2,
+        "max_consecutive_run": 3,
+        "max_repeats_from_last_draw": 12,
+        "max_attempts": 250,
+        "ticket_size": 15,
+        "min_even_numbers": 6,
+        "max_even_numbers": 9
+      }
+    }
+  },
+  "results": {
+    "random_15": {
+      "strategy": "random",
+      "qtd_concursos_avaliados": 1,
+      "qtd_tickets_total": 10,
+      "summary_geral": {
+        "total": 10,
+        "media": 8.9,
+        "max": 12,
+        "min": 5,
+        "distribution": {
+          "5": 1,
+          "7": 1,
+          "8": 1,
+          "9": 4,
+          "10": 1,
+          "11": 1,
+          "12": 1
+        }
+      },
+      "resultados_por_concurso": [
+        {
+          "contest": 100,
+          "summary": {
+            "total": 10,
+            "media": 8.9,
+            "max": 12,
+            "min": 5,
+            "distribution": {
+              "5": 1,
+              "7": 1,
+              "8": 1,
+              "9": 4,
+              "10": 1,
+              "11": 1,
+              "12": 1
+            }
+          }
+        }
+      ],
+      "seed_results": {
+        "42": {
+          "strategy": "random",
+          "qtd_concursos_avaliados": 1,
+          "qtd_tickets_total": 10,
+          "summary_geral": {
+            "total": 10,
+            "media": 8.9,
+            "max": 12,
+            "min": 5,
+            "distribution": {
+              "5": 1,
+              "7": 1,
+              "8": 1,
+              "9": 4,
+              "10": 1,
+              "11": 1,
+              "12": 1
+            }
+          },
+          "resultados_por_concurso": [
+            {
+              "contest": 100,
+              "summary": {
+                "total": 10,
+                "media": 8.9,
+                "max": 12,
+                "min": 5,
+                "distribution": {
+                  "5": 1,
+                  "7": 1,
+                  "8": 1,
+                  "9": 4,
+                  "10": 1,
+                  "11": 1,
+                  "12": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      "metadata": {
+        "id": "random_15",
+        "display_name": "Random 15",
+        "family": "random",
+        "preset_name": null,
+        "bet_size": 15,
+        "strategy_name": "random",
+        "strategy_kwargs": {
+          "ticket_size": 15
+        }
+      },
+      "cost_analysis": {
+        "bet_cost": 3.5,
+        "relative_cost": 1.0,
+        "media_por_real": 2.542857142857143,
+        "maximo_por_real": 3.4285714285714284
+      }
+    },
+    "intentionality_vector_15": {
+      "strategy": "intentionality_vector",
+      "qtd_concursos_avaliados": 1,
+      "qtd_tickets_total": 10,
+      "summary_geral": {
+        "total": 10,
+        "media": 9.2,
+        "max": 11,
+        "min": 7,
+        "distribution": {
+          "7": 1,
+          "8": 2,
+          "9": 2,
+          "10": 4,
+          "11": 1
+        }
+      },
+      "resultados_por_concurso": [
+        {
+          "contest": 100,
+          "summary": {
+            "total": 10,
+            "media": 9.2,
+            "max": 11,
+            "min": 7,
+            "distribution": {
+              "7": 1,
+              "8": 2,
+              "9": 2,
+              "10": 4,
+              "11": 1
+            }
+          }
+        }
+      ],
+      "seed_results": {
+        "42": {
+          "strategy": "intentionality_vector",
+          "qtd_concursos_avaliados": 1,
+          "qtd_tickets_total": 10,
+          "summary_geral": {
+            "total": 10,
+            "media": 9.2,
+            "max": 11,
+            "min": 7,
+            "distribution": {
+              "7": 1,
+              "8": 2,
+              "9": 2,
+              "10": 4,
+              "11": 1
+            }
+          },
+          "resultados_por_concurso": [
+            {
+              "contest": 100,
+              "summary": {
+                "total": 10,
+                "media": 9.2,
+                "max": 11,
+                "min": 7,
+                "distribution": {
+                  "7": 1,
+                  "8": 2,
+                  "9": 2,
+                  "10": 4,
+                  "11": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      "metadata": {
+        "id": "intentionality_vector_15",
+        "display_name": "Intentionality Vector 15",
+        "family": "intentionality_vector",
+        "preset_name": null,
+        "bet_size": 15,
+        "strategy_name": "intentionality_vector",
+        "strategy_kwargs": {
+          "ticket_size": 15
+        }
+      },
+      "cost_analysis": {
+        "bet_cost": 3.5,
+        "relative_cost": 1.0,
+        "media_por_real": 2.6285714285714286,
+        "maximo_por_real": 3.142857142857143
+      }
+    },
+    "quantum_inspired_15": {
+      "strategy": "quantum_inspired",
+      "qtd_concursos_avaliados": 1,
+      "qtd_tickets_total": 10,
+      "summary_geral": {
+        "total": 10,
+        "media": 9.1,
+        "max": 10,
+        "min": 7,
+        "distribution": {
+          "7": 1,
+          "8": 1,
+          "9": 4,
+          "10": 4
+        }
+      },
+      "resultados_por_concurso": [
+        {
+          "contest": 100,
+          "summary": {
+            "total": 10,
+            "media": 9.1,
+            "max": 10,
+            "min": 7,
+            "distribution": {
+              "7": 1,
+              "8": 1,
+              "9": 4,
+              "10": 4
+            }
+          }
+        }
+      ],
+      "seed_results": {
+        "42": {
+          "strategy": "quantum_inspired",
+          "qtd_concursos_avaliados": 1,
+          "qtd_tickets_total": 10,
+          "summary_geral": {
+            "total": 10,
+            "media": 9.1,
+            "max": 10,
+            "min": 7,
+            "distribution": {
+              "7": 1,
+              "8": 1,
+              "9": 4,
+              "10": 4
+            }
+          },
+          "resultados_por_concurso": [
+            {
+              "contest": 100,
+              "summary": {
+                "total": 10,
+                "media": 9.1,
+                "max": 10,
+                "min": 7,
+                "distribution": {
+                  "7": 1,
+                  "8": 1,
+                  "9": 4,
+                  "10": 4
+                }
+              }
+            }
+          ]
+        }
+      },
+      "metadata": {
+        "id": "quantum_inspired_15",
+        "display_name": "Quantum Inspired 15",
+        "family": "quantum_inspired",
+        "preset_name": null,
+        "bet_size": 15,
+        "strategy_name": "quantum_inspired",
+        "strategy_kwargs": {
+          "ticket_size": 15
+        }
+      },
+      "cost_analysis": {
+        "bet_cost": 3.5,
+        "relative_cost": 1.0,
+        "media_por_real": 2.6,
+        "maximo_por_real": 2.857142857142857
+      }
+    },
+    "quantum_15": {
+      "strategy": "quantum",
+      "qtd_concursos_avaliados": 1,
+      "qtd_tickets_total": 10,
+      "summary_geral": {
+        "total": 10,
+        "media": 9.7,
+        "max": 12,
+        "min": 9,
+        "distribution": {
+          "9": 5,
+          "10": 4,
+          "12": 1
+        }
+      },
+      "resultados_por_concurso": [
+        {
+          "contest": 100,
+          "summary": {
+            "total": 10,
+            "media": 9.7,
+            "max": 12,
+            "min": 9,
+            "distribution": {
+              "9": 5,
+              "10": 4,
+              "12": 1
+            }
+          }
+        }
+      ],
+      "seed_results": {
+        "42": {
+          "strategy": "quantum",
+          "qtd_concursos_avaliados": 1,
+          "qtd_tickets_total": 10,
+          "summary_geral": {
+            "total": 10,
+            "media": 9.7,
+            "max": 12,
+            "min": 9,
+            "distribution": {
+              "9": 5,
+              "10": 4,
+              "12": 1
+            }
+          },
+          "resultados_por_concurso": [
+            {
+              "contest": 100,
+              "summary": {
+                "total": 10,
+                "media": 9.7,
+                "max": 12,
+                "min": 9,
+                "distribution": {
+                  "9": 5,
+                  "10": 4,
+                  "12": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      "metadata": {
+        "id": "quantum_15",
+        "display_name": "Quantum 15",
+        "family": "quantum",
+        "preset_name": null,
+        "bet_size": 15,
+        "strategy_name": "quantum",
+        "strategy_kwargs": {
+          "ticket_size": 15
+        }
+      },
+      "cost_analysis": {
+        "bet_cost": 3.5,
+        "relative_cost": 1.0,
+        "media_por_real": 2.7714285714285714,
+        "maximo_por_real": 3.4285714285714284
+      }
+    },
+    "statistical_frequency_heavy_15": {
+      "strategy": "statistical",
+      "qtd_concursos_avaliados": 1,
+      "qtd_tickets_total": 10,
+      "summary_geral": {
+        "total": 10,
+        "media": 8.9,
+        "max": 10,
+        "min": 8,
+        "distribution": {
+          "8": 2,
+          "9": 7,
+          "10": 1
+        }
+      },
+      "resultados_por_concurso": [
+        {
+          "contest": 100,
+          "summary": {
+            "total": 10,
+            "media": 8.9,
+            "max": 10,
+            "min": 8,
+            "distribution": {
+              "8": 2,
+              "9": 7,
+              "10": 1
+            }
+          }
+        }
+      ],
+      "seed_results": {
+        "42": {
+          "strategy": "statistical",
+          "qtd_concursos_avaliados": 1,
+          "qtd_tickets_total": 10,
+          "summary_geral": {
+            "total": 10,
+            "media": 8.9,
+            "max": 10,
+            "min": 8,
+            "distribution": {
+              "8": 2,
+              "9": 7,
+              "10": 1
+            }
+          },
+          "resultados_por_concurso": [
+            {
+              "contest": 100,
+              "summary": {
+                "total": 10,
+                "media": 8.9,
+                "max": 10,
+                "min": 8,
+                "distribution": {
+                  "8": 2,
+                  "9": 7,
+                  "10": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      "metadata": {
+        "id": "statistical_frequency_heavy_15",
+        "display_name": "Statistical frequency_heavy 15",
+        "family": "statistical",
+        "preset_name": "frequency_heavy",
+        "bet_size": 15,
+        "strategy_name": "statistical",
+        "strategy_kwargs": {
+          "frequency_weight": 0.6,
+          "delay_weight": 0.2,
+          "parity_weight": 0.1,
+          "range_weight": 0.1,
+          "min_numbers_per_range": 2,
+          "max_consecutive_run": 3,
+          "max_repeats_from_last_draw": 12,
+          "max_attempts": 250,
+          "ticket_size": 15,
+          "min_even_numbers": 6,
+          "max_even_numbers": 9
+        }
+      },
+      "cost_analysis": {
+        "bet_cost": 3.5,
+        "relative_cost": 1.0,
+        "media_por_real": 2.542857142857143,
+        "maximo_por_real": 2.857142857142857
+      }
+    }
+  }
+}

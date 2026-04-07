@@ -53,4 +53,13 @@ if not exist "%VENV_DIR%\Scripts\python.exe" (
 call "%VENV_DIR%\Scripts\activate.bat"
 python -m pip install --upgrade pip
 python -m pip install -r "%ROOT_DIR%requirements.txt"
+
+:retry_fetch
 python -c "import runpy; runpy.run_path(r'src/scripts/001_fetch.py', run_name='__main__')"
+if %errorlevel%==0 (
+  exit /b 0
+)
+
+echo Falha temporaria ao atualizar os concursos. Nova tentativa em 15 segundos...
+timeout /t 15 /nobreak >nul
+goto retry_fetch
