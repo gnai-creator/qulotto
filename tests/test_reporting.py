@@ -21,6 +21,11 @@ def test_save_backtest_artifacts_creates_expected_files(tmp_path: Path, monkeypa
             "seed_count": 2,
             "seeds": [42, 43],
             "presets": ["balanced"],
+            "total_runs": 4,
+            "target_draw_count": 2,
+            "estimated_tickets": 40,
+            "estimated_total_cost": 140.0,
+            "estimated_cost_by_bet_size": {15: 140.0},
         },
         "experiments": {
             "random_15": {

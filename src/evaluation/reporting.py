@@ -23,6 +23,10 @@ def _contest_label(value: int | None, fallback: str) -> str:
     return str(value) if value is not None else fallback
 
 
+def _format_currency(value: float) -> str:
+    return f"R$ {value:,.2f}"
+
+
 def _rank_results(results: dict, key: str) -> list[tuple[str, float]]:
     return sorted(
         ((experiment_id, result["cost_analysis"][key] if key in result["cost_analysis"] else result["summary_geral"][key]) for experiment_id, result in results.items()),
@@ -107,6 +111,19 @@ def format_backtest_report(comparison: dict) -> str:
         f"- Quantidade de seeds: {params['seed_count']}",
         f"- Seeds usadas: {', '.join(map(str, params['seeds']))}",
         f"- Presets comparados: {', '.join(params['presets'])}",
+        f"- Runs totais: {params['total_runs']}",
+        f"- Concursos no intervalo: {params['target_draw_count']}",
+        f"- Tickets estimados: {params['estimated_tickets']}",
+        f"- Custo estimado da bateria: {_format_currency(params['estimated_total_cost'])}",
+        "",
+        "## Estimativa de Custo",
+        "",
+    ]
+
+    for bet_size, cost in params["estimated_cost_by_bet_size"].items():
+        lines.append(f"- {bet_size} dezenas: {_format_currency(cost)}")
+
+    lines.extend([
         "",
         "## Graficos",
         "",
@@ -128,7 +145,7 @@ def format_backtest_report(comparison: dict) -> str:
         "",
         "### Ranking por Media",
         "",
-    ]
+    ])
 
     for experiment_id, value in media_ranking:
         lines.append(f"- {experiments[experiment_id]['display_name']}: {value:.2f}")

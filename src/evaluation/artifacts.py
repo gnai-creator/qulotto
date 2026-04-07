@@ -69,3 +69,15 @@ def backtest_seed_chart_path(report_dir: Path) -> Path:
 
 def backtest_bet_size_chart_path(report_dir: Path) -> Path:
     return report_dir / f"backtest_bet_sizes_{artifact_date()}.png"
+
+
+def future_markdown_path(report_dir: Path) -> Path:
+    return report_dir / f"future_{artifact_date()}.md"
+
+
+def future_json_path(report_dir: Path) -> Path:
+    return report_dir / f"future_{artifact_date()}.json"
+
+
+def future_csv_path(report_dir: Path) -> Path:
+    return report_dir / f"future_{artifact_date()}.csv"

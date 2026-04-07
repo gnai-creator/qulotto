@@ -3,14 +3,14 @@ from pathlib import Path
 
 REPORT_DIR = Path("docs/report")
 
-DEFAULT_QTD = 100
+DEFAULT_QTD = 10
 DEFAULT_BET_SIZE = 15
-DEFAULT_BET_SIZES = [15, 16, 17, 18, 19, 20]
+DEFAULT_BET_SIZES = [15, 16]
 DEFAULT_HISTORY = 50
 DEFAULT_INICIO = 100
-DEFAULT_FIM = 200
+DEFAULT_FIM = 100
 DEFAULT_SEED = 42
-DEFAULT_SEED_COUNT = 5
+DEFAULT_SEED_COUNT = 1
 DEFAULT_FREQUENCY_WEIGHT = 0.45
 DEFAULT_DELAY_WEIGHT = 0.35
 DEFAULT_PARITY_WEIGHT = 0.10
@@ -22,7 +22,12 @@ DEFAULT_MAX_CONSECUTIVE_RUN = 3
 DEFAULT_MAX_REPEATS_FROM_LAST_DRAW = 11
 DEFAULT_MAX_ATTEMPTS = 250
 
-AVAILABLE_STRATEGIES = ["random", "statistical", "quantum"]
+AVAILABLE_STRATEGIES = [
+    "random",
+    "statistical",
+    "intentionality_vector",
+    "quantum",
+]
 DEFAULT_STRATEGY = "random"
 
 STATISTICAL_PRESETS = {
@@ -68,7 +73,9 @@ STATISTICAL_PRESETS = {
     },
 }
 
-DEFAULT_PRESET_NAMES = list(STATISTICAL_PRESETS.keys())
+DEFAULT_PRESET_NAMES = ["balanced"]
+FULL_PRESET_NAMES = list(STATISTICAL_PRESETS.keys())
+FULL_BET_SIZES = [15, 16, 17, 18, 19, 20]
 LOTOFACIL_BET_COSTS = {
     15: 3.50,
     16: 56.00,
@@ -79,6 +86,30 @@ LOTOFACIL_BET_COSTS = {
 }
 
 
+def _minimum_feasible_max_consecutive_run(ticket_size: int) -> int:
+    missing_numbers = 25 - ticket_size
+    available_blocks = missing_numbers + 1
+    return (ticket_size + available_blocks - 1) // available_blocks
+
+
+def _minimum_feasible_repeats_from_last_draw(ticket_size: int) -> int:
+    return max(0, ticket_size - 10)
+
+
+def _recommended_max_consecutive_run_floor(ticket_size: int) -> int:
+    if ticket_size >= 19:
+        return 4
+    return _minimum_feasible_max_consecutive_run(ticket_size)
+
+
+def _recommended_max_repeats_from_last_draw_floor(ticket_size: int) -> int:
+    if ticket_size >= 20:
+        return 13
+    if ticket_size >= 19:
+        return 10
+    return _minimum_feasible_repeats_from_last_draw(ticket_size)
+
+
 def build_statistical_preset(preset_name: str, ticket_size: int) -> dict:
     if preset_name not in STATISTICAL_PRESETS:
         raise ValueError(f"Preset desconhecido: {preset_name}")
@@ -87,4 +118,12 @@ def build_statistical_preset(preset_name: str, ticket_size: int) -> dict:
     preset["ticket_size"] = ticket_size
     preset["min_even_numbers"] = max(6, ticket_size - 9)
     preset["max_even_numbers"] = min(12, ticket_size - 6)
+    preset["max_consecutive_run"] = max(
+        preset["max_consecutive_run"],
+        _recommended_max_consecutive_run_floor(ticket_size),
+    )
+    preset["max_repeats_from_last_draw"] = max(
+        preset["max_repeats_from_last_draw"],
+        _recommended_max_repeats_from_last_draw_floor(ticket_size),
+    )
     return preset

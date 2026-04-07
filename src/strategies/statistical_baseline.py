@@ -3,6 +3,8 @@ import random
 from src.core.models import Draw, Ticket
 
 RANGE_LABELS = ("1-5", "6-10", "11-15", "16-20", "21-25")
+TOTAL_NUMBERS = 25
+LAST_DRAW_SIZE = 15
 
 
 def frequencia_dos_numeros(draws: list[Draw]) -> dict[int, int]:
@@ -57,6 +59,17 @@ def _normalize(values: dict[int, int] | dict[str, int]) -> dict:
     return {key: value / max_value for key, value in values.items()}
 
 
+def minimum_feasible_max_consecutive_run(ticket_size: int) -> int:
+    missing_numbers = TOTAL_NUMBERS - ticket_size
+    available_blocks = missing_numbers + 1
+    return (ticket_size + available_blocks - 1) // available_blocks
+
+
+def minimum_feasible_repeats_from_last_draw(ticket_size: int) -> int:
+    available_outside_last_draw = TOTAL_NUMBERS - LAST_DRAW_SIZE
+    return max(0, ticket_size - available_outside_last_draw)
+
+
 class StatisticalBaselineStrategy:
     def __init__(
         self,
@@ -100,7 +113,36 @@ class StatisticalBaselineStrategy:
         self.max_attempts = max_attempts
         self.last_draw_numbers = set(history_draws[-1].numbers)
 
+        self._validate_constraints()
         self.scores = self._score_numbers()
+
+    def _validate_constraints(self) -> None:
+        if not 15 <= self.ticket_size <= 20:
+            raise ValueError("ticket_size deve estar entre 15 e 20.")
+
+        if self.min_even_numbers > self.max_even_numbers:
+            raise ValueError("min_even_numbers nao pode ser maior que max_even_numbers.")
+
+        if self.min_even_numbers < max(0, self.ticket_size - 13):
+            raise ValueError("min_even_numbers abaixo do minimo viavel para o tamanho da aposta.")
+
+        if self.max_even_numbers > min(12, self.ticket_size):
+            raise ValueError("max_even_numbers acima do maximo viavel para o tamanho da aposta.")
+
+        if self.min_numbers_per_range * len(RANGE_LABELS) > self.ticket_size:
+            raise ValueError("min_numbers_per_range torna o ticket impossivel para esse tamanho.")
+
+        minimum_run = minimum_feasible_max_consecutive_run(self.ticket_size)
+        if self.max_consecutive_run < minimum_run:
+            raise ValueError(
+                "max_consecutive_run abaixo do minimo viavel para o tamanho da aposta."
+            )
+
+        minimum_repeats = minimum_feasible_repeats_from_last_draw(self.ticket_size)
+        if self.max_repeats_from_last_draw < minimum_repeats:
+            raise ValueError(
+                "max_repeats_from_last_draw abaixo do minimo viavel para o tamanho da aposta."
+            )
 
     def _frequencia_dos_numeros(self) -> dict[int, int]:
         return frequencia_dos_numeros(self.history_draws)
@@ -164,6 +206,28 @@ class StatisticalBaselineStrategy:
             raise ValueError("Nao foi possivel amostrar numeros suficientes.")
 
         return selected
+
+    def _weighted_exclusions(self, amount: int) -> list[int]:
+        available = list(range(1, 26))
+        selected: list[int] = []
+        max_score = max(self.scores.values(), default=1.0)
+
+        while available and len(selected) < amount:
+            weights = [
+                (max_score - self.scores[number]) + 1e-6
+                for number in available
+            ]
+            chosen = self.rng.choices(available, weights=weights, k=1)[0]
+            selected.append(chosen)
+            available.remove(chosen)
+
+        if len(selected) != amount:
+            raise ValueError("Nao foi possivel amostrar exclusoes suficientes.")
+
+        return selected
+
+    def _exclusion_order(self) -> list[int]:
+        return self._weighted_exclusions(TOTAL_NUMBERS)
 
     def _count_even_numbers(self, numbers: list[int]) -> int:
         return sum(1 for number in numbers if number % 2 == 0)
@@ -261,6 +325,85 @@ class StatisticalBaselineStrategy:
         )
         return minimum_numbers_needed <= remaining_slots
 
+    def _can_complete_large_ticket(self, excluded_numbers: set[int]) -> bool:
+        exclusions_needed = TOTAL_NUMBERS - self.ticket_size
+        remaining_exclusions = exclusions_needed - len(excluded_numbers)
+        if remaining_exclusions < 0:
+            return False
+
+        excluded_even = sum(1 for number in excluded_numbers if number % 2 == 0)
+        max_final_even = 12 - excluded_even
+        min_final_even = max_final_even - min(
+            remaining_exclusions,
+            12 - excluded_even,
+        )
+        if max_final_even < self.min_even_numbers:
+            return False
+        if min_final_even > self.max_even_numbers:
+            return False
+
+        excluded_from_last_draw = len(excluded_numbers & self.last_draw_numbers)
+        current_repeats = LAST_DRAW_SIZE - excluded_from_last_draw
+        available_last_draw_exclusions = LAST_DRAW_SIZE - excluded_from_last_draw
+        min_possible_repeats = current_repeats - min(
+            remaining_exclusions,
+            available_last_draw_exclusions,
+        )
+        if min_possible_repeats > self.max_repeats_from_last_draw:
+            return False
+
+        excluded_by_range = {label: 0 for label in RANGE_LABELS}
+        for number in excluded_numbers:
+            excluded_by_range[_range_label(number)] += 1
+
+        for label in RANGE_LABELS:
+            final_included = 5 - excluded_by_range[label]
+            if final_included < self.min_numbers_per_range:
+                return False
+
+        return True
+
+    def _search_large_ticket(
+        self,
+        ordered_numbers: list[int],
+        start_index: int,
+        excluded_numbers: set[int],
+    ) -> Ticket | None:
+        exclusions_needed = TOTAL_NUMBERS - self.ticket_size
+
+        if len(excluded_numbers) == exclusions_needed:
+            ticket = Ticket(
+                numbers=[
+                    number for number in range(1, 26)
+                    if number not in excluded_numbers
+                ]
+            )
+            if self._is_valid_ticket_shape(ticket):
+                return ticket
+            return None
+
+        if not self._can_complete_large_ticket(excluded_numbers):
+            return None
+
+        remaining_to_choose = exclusions_needed - len(excluded_numbers)
+        remaining_candidates = len(ordered_numbers) - start_index
+        if remaining_candidates < remaining_to_choose:
+            return None
+
+        for index in range(start_index, len(ordered_numbers)):
+            number = ordered_numbers[index]
+            excluded_numbers.add(number)
+            ticket = self._search_large_ticket(
+                ordered_numbers,
+                index + 1,
+                excluded_numbers,
+            )
+            if ticket is not None:
+                return ticket
+            excluded_numbers.remove(number)
+
+        return None
+
     def _pick_number(
         self,
         selected_numbers: set[int],
@@ -278,42 +421,73 @@ class StatisticalBaselineStrategy:
 
         raise ValueError("Nao foi possivel selecionar um numero valido.")
 
+    def _candidate_pool(self, selected_numbers: set[int]) -> list[int]:
+        distribution = self._range_distribution(sorted(selected_numbers))
+        missing_ranges = [
+            label
+            for label, count in distribution.items()
+            if count < self.min_numbers_per_range
+        ]
+        if missing_ranges:
+            return [
+                number
+                for number in range(1, 26)
+                if number not in selected_numbers
+                and _range_label(number) in missing_ranges
+            ]
+
+        return [
+            number for number in range(1, 26)
+            if number not in selected_numbers
+        ]
+
+    def _ordered_candidates(self, selected_numbers: set[int]) -> list[int]:
+        candidates = self._candidate_pool(selected_numbers)
+        if not candidates:
+            return []
+        return self._weighted_sample_without_replacement(candidates, len(candidates))
+
+    def _search_ticket(
+        self,
+        selected_numbers: set[int],
+        target_even_numbers: int,
+    ) -> Ticket | None:
+        if len(selected_numbers) == self.ticket_size:
+            ticket = Ticket(numbers=sorted(selected_numbers))
+            if self._is_valid_ticket_shape(ticket):
+                return ticket
+            return None
+
+        for number in self._ordered_candidates(selected_numbers):
+            if not self._can_add_number(selected_numbers, number, target_even_numbers):
+                continue
+            selected_numbers.add(number)
+            ticket = self._search_ticket(selected_numbers, target_even_numbers)
+            if ticket is not None:
+                return ticket
+            selected_numbers.remove(number)
+
+        return None
+
     def _build_ticket(self) -> Ticket:
-        selected_numbers: set[int] = set()
+        if self.ticket_size >= 19:
+            ticket = self._search_large_ticket(
+                self._exclusion_order(),
+                0,
+                set(),
+            )
+            if ticket is None:
+                raise ValueError("Nao foi possivel construir um ticket grande valido.")
+            return ticket
+
         target_even_numbers = self.rng.randint(
             self.min_even_numbers,
             self.max_even_numbers,
         )
-
-        for label in RANGE_LABELS:
-            range_numbers = [
-                number for number in range(1, 26)
-                if _range_label(number) == label
-            ]
-            while (
-                self._range_distribution(sorted(selected_numbers))[label]
-                < self.min_numbers_per_range
-            ):
-                chosen = self._pick_number(
-                    selected_numbers,
-                    [number for number in range_numbers if number not in selected_numbers],
-                    target_even_numbers,
-                )
-                selected_numbers.add(chosen)
-
-        while len(selected_numbers) < self.ticket_size:
-            remaining_numbers = [
-                number for number in range(1, 26)
-                if number not in selected_numbers
-            ]
-            chosen = self._pick_number(
-                selected_numbers,
-                remaining_numbers,
-                target_even_numbers,
-            )
-            selected_numbers.add(chosen)
-
-        return Ticket(numbers=sorted(selected_numbers))
+        ticket = self._search_ticket(set(), target_even_numbers)
+        if ticket is None:
+            raise ValueError("Nao foi possivel construir um ticket valido.")
+        return ticket
 
     def _is_valid_ticket_shape(self, ticket: Ticket) -> bool:
         if len(ticket.numbers) != self.ticket_size:

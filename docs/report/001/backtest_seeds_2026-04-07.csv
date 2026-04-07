@@ -1,9 +1,0 @@
-experiment,family,preset,bet_size,seed,total,media,max,min
-Random 15,random,,15,42,2,8.500000,9,8
-Random 15,random,,15,43,2,8.500000,9,8
-Statistical balanced 15,statistical,balanced,15,42,1,8.000000,8,8
-Statistical balanced 15,statistical,balanced,15,43,1,10.000000,10,10
-Random 16,random,,16,42,2,9.500000,10,9
-Random 16,random,,16,43,2,9.500000,10,9
-Statistical balanced 16,statistical,balanced,16,42,1,9.000000,9,9
-Statistical balanced 16,statistical,balanced,16,43,1,10.000000,10,10

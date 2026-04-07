@@ -10,9 +10,10 @@ def experiment_id(family: str, bet_size: int, preset_name: str | None = None) ->
 
 
 def display_name(family: str, bet_size: int, preset_name: str | None = None) -> str:
+    family_label = family.replace("_", " ").title()
     if preset_name is None:
-        return f"{family.title()} {bet_size}"
-    return f"{family.title()} {preset_name} {bet_size}"
+        return f"{family_label} {bet_size}"
+    return f"{family_label} {preset_name} {bet_size}"
 
 
 def build_experiment_specs(presets: list[str], bet_sizes: list[int]) -> list[dict]:
@@ -27,6 +28,30 @@ def build_experiment_specs(presets: list[str], bet_sizes: list[int]) -> list[dic
                 "preset_name": None,
                 "bet_size": bet_size,
                 "strategy_name": "random",
+                "strategy_kwargs": {"ticket_size": bet_size},
+            }
+        )
+
+        specs.append(
+            {
+                "id": experiment_id("intentionality_vector", bet_size),
+                "display_name": display_name("intentionality_vector", bet_size),
+                "family": "intentionality_vector",
+                "preset_name": None,
+                "bet_size": bet_size,
+                "strategy_name": "intentionality_vector",
+                "strategy_kwargs": {"ticket_size": bet_size},
+            }
+        )
+
+        specs.append(
+            {
+                "id": experiment_id("quantum_inspired", bet_size),
+                "display_name": display_name("quantum_inspired", bet_size),
+                "family": "quantum_inspired",
+                "preset_name": None,
+                "bet_size": bet_size,
+                "strategy_name": "quantum_inspired",
                 "strategy_kwargs": {"ticket_size": bet_size},
             }
         )
@@ -129,12 +154,23 @@ def run_experiment_specs(
     fim: int | None,
     seeds: list[int],
     ticket_callback=None,
+    progress_callback=None,
 ) -> dict[str, dict]:
     results: dict[str, dict] = {}
+    total_runs = len(specs) * len(seeds)
+    current_run = 0
 
     for spec in specs:
         seed_runs: dict[int, dict] = {}
         for seed in seeds:
+            current_run += 1
+            if progress_callback is not None:
+                progress_callback(
+                    current=current_run,
+                    total=total_runs,
+                    spec=spec,
+                    seed=seed,
+                )
             seed_runs[seed] = run_backtest(
                 draws=draws,
                 strategy_name=spec["strategy_name"],

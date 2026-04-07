@@ -87,4 +87,14 @@ def parse_arguments():
         default=DEFAULT_SEED_COUNT,
         help="Quantidade de seeds consecutivas para rodar em cada experimento",
     )
+    parser.add_argument(
+        "--completo",
+        action="store_true",
+        help="Roda a bateria completa com todos os presets e tamanhos de aposta",
+    )
+    parser.add_argument(
+        "--future",
+        action="store_true",
+        help="Gera apenas palpites para o proximo concurso, sem backtest",
+    )
     return parser.parse_args()
