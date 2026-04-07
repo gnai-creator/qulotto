@@ -57,6 +57,8 @@ Esses scripts:
 
 Depois disso, use `run.sh` ou `run.bat`.
 
+Se preferir interface gráfica no navegador, use `gui.sh` ou `gui.bat`.
+
 ### Linux e macOS
 
 Use:
@@ -69,6 +71,18 @@ Para gerar palpites para um concurso futuro:
 
 ```bash
 ./run.sh --future --qtd 10
+```
+
+Para abrir a interface gráfica:
+
+```bash
+./gui.sh
+```
+
+Para abrir a interface gráfica em um navegador específico:
+
+```bash
+./gui.sh --browser firefox
 ```
 
 ### Windows
@@ -85,6 +99,12 @@ Para gerar palpites para um concurso futuro:
 run.bat --future --qtd 10
 ```
 
+Para abrir a interface gráfica:
+
+```bat
+gui.bat
+```
+
 ## O Que Esses Scripts Fazem
 
 Os arquivos `run.sh` e `run.bat` tentam:
@@ -96,6 +116,8 @@ Os arquivos `run.sh` e `run.bat` tentam:
 5. rodar o projeto com os argumentos que você passar
 
 Os arquivos `atualizar.sh` e `atualizar.bat` fazem o mesmo bootstrap, mas executam a atualização do histórico antes do uso do sistema.
+
+Os arquivos `gui.sh` e `gui.bat` fazem o mesmo bootstrap e depois sobem um servidor local com interface HTML + JavaScript para você escolher os argumentos sem usar terminal.
 
 ## Exemplos de Uso
 

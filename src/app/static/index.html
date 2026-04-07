@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qulotto GUI</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar card">
+      <div class="brand">
+        <h1>Qulotto</h1>
+        <p>Interface local para gerar backtests, relatórios e palpites futuros sem usar linha de comando.</p>
+      </div>
+
+      <form id="run-form">
+        <div class="toggle">
+          <input id="future" type="checkbox">
+          <label for="future">Gerar apenas palpites do próximo concurso</label>
+        </div>
+
+        <div class="toggle">
+          <input id="completo" type="checkbox">
+          <label for="completo">Rodar bateria completa</label>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label for="qtd">Tickets por experimento</label>
+            <input id="qtd" type="number" min="1">
+          </div>
+          <div class="field">
+            <label for="history">Janela histórica</label>
+            <input id="history" type="number" min="1">
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label for="inicio">Concurso inicial</label>
+            <input id="inicio" type="number" min="1">
+          </div>
+          <div class="field">
+            <label for="fim">Concurso final</label>
+            <input id="fim" type="number" min="1">
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label for="seed">Seed inicial</label>
+            <input id="seed" type="number">
+          </div>
+          <div class="field">
+            <label for="seed-count">Quantidade de seeds</label>
+            <input id="seed-count" type="number" min="1">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="tamanho-aposta">Tamanho único de aposta</label>
+          <select id="tamanho-aposta">
+            <option value="">Usar a bateria selecionada abaixo</option>
+          </select>
+        </div>
+
+        <div class="checkbox-grid">
+          <span class="section-title">Tamanhos de aposta da bateria</span>
+          <div id="bet-sizes"></div>
+        </div>
+
+        <div class="checkbox-grid">
+          <span class="section-title">Presets estatísticos</span>
+          <div id="presets"></div>
+        </div>
+
+        <button id="submit-btn" type="submit">Gerar relatório e palpites</button>
+      </form>
+    </aside>
+
+    <main class="content">
+      <section class="hero card">
+        <h2>Painel de geração</h2>
+        <p>Escolha os parâmetros, rode o experimento e acompanhe os relatórios, gráficos e palpites diretamente nesta página.</p>
+      </section>
+
+      <div id="status" class="status">Carregando configuração inicial...</div>
+      <section id="stats" class="stats card"></section>
+      <section class="links card">
+        <span class="section-title">Arquivos gerados</span>
+        <div id="artifact-list" class="artifact-list"></div>
+      </section>
+      <section class="images card">
+        <span class="section-title">Gráficos</span>
+        <div id="image-list"></div>
+      </section>
+      <section id="prediction-panel" class="prediction-grid card" hidden>
+        <span class="section-title">Palpites futuros</span>
+        <div id="prediction-content"></div>
+      </section>
+      <section class="report-text card">
+        <span class="section-title">Relatório em Markdown</span>
+        <div id="report-output" class="report-output">Nenhum relatório gerado ainda.</div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+experiment,family,preset,bet_size,seed,total,media,max,min
+Random 15,random,,15,42,1,9.000000,9,9
+Intentionality Vector 15,intentionality_vector,,15,42,1,9.000000,9,9
+Quantum Inspired 15,quantum_inspired,,15,42,1,9.000000,9,9
+Quantum 15,quantum,,15,42,1,9.000000,9,9
+Statistical balanced 15,statistical,balanced,15,42,1,7.000000,7,7
+Random 16,random,,16,42,1,9.000000,9,9
+Intentionality Vector 16,intentionality_vector,,16,42,1,12.000000,12,12
+Quantum Inspired 16,quantum_inspired,,16,42,1,10.000000,10,10
+Quantum 16,quantum,,16,42,1,10.000000,10,10
+Statistical balanced 16,statistical,balanced,16,42,1,8.000000,8,8

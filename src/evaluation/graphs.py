@@ -1,5 +1,7 @@
 from pathlib import Path
+import os
 
+os.environ.setdefault("MPLCONFIGDIR", "/tmp/qulotto-matplotlib-cache")
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
